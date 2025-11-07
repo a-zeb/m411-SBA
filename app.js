@@ -34,9 +34,35 @@ function submit(event) {
   taskArr.push(taskObj);
 
   for (const key in taskObj) {
-    const newCell = newRow.insertCell();
-    newCell.innerText = taskObj[key];
-    //TODO: make taskObj.status into a dropdown
+    if (key == "status") {
+      const newUpdateStatusCell = newRow.insertCell();
+
+      const updateStatusDropdown = document.createElement("select");
+      updateStatusDropdown.setAttribute("id", `status-${taskObj.id}`);
+      updateStatusDropdown.setAttribute("class", "form-select");
+      updateStatusDropdown.addEventListener("click", updateStatus);
+
+      const inProgressOption = document.createElement("option");
+      inProgressOption.value = "In Progress";
+      inProgressOption.innerText = "In Progress";
+
+      const completedOption = document.createElement("option");
+      completedOption.value = "Completed";
+      completedOption.innerText = "Completed";
+
+      updateStatusDropdown.value = taskObj[key];
+
+      taskObj[key] == "In Progress"
+        ? (inProgressOption.selected = true)
+        : (completedOption.selected = true);
+
+      updateStatusDropdown.appendChild(inProgressOption);
+      updateStatusDropdown.appendChild(completedOption);
+      newUpdateStatusCell.appendChild(updateStatusDropdown);
+    } else {
+      const newCell = newRow.insertCell();
+      newCell.innerText = taskObj[key];
+    }
   }
 
   newRow.setAttribute("id", `row-${taskObj.id}`);
@@ -61,14 +87,18 @@ function assignID() {
   }
 }
 
-function updateStatus(updatedData) {
+function updateStatus(updateEvent) {
   //TODO find row by key, modify row
-  // let updatedRow = taskArr.find((row) => row.id === updatedData.id);
-  console.log("update status dropdown changed");
+  // let updatedTableRowTag = document.getElementById(`status-${rowId}`);
+  // let updatedTableRowId = updatedTableRowTag.slice(7);
+  // let updatedRowObj = taskArr.find((row) => row.id === updatedTableRowId);
+  // console.log("row to update: " + updatedRowObj);
 }
 
 function deleteRow(deleteEvent) {
   let deleteID = Number(deleteEvent.target.value);
   let filteredRowEl = taskArr.filter((rowObj) => rowObj.id !== deleteID);
   taskArr = filteredRowEl;
+  domRowToDelete = document.getElementById(`row-${deleteEvent.target.value}`);
+  domRowToDelete.remove();
 }
