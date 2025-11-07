@@ -3,16 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="app.js" defer></script>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js" defer></script>
     <title>SBA-4</title>
   </head>
   <body>
-    <main></main>
+    <main>
+      <form
+        class="container d-flex flex-column border m-3 p-3 justify-content-center align-items-center"
+      >
+        <div class="mb-3">
+          <label for="taskNameInput" class="form-label">Task Name:</label>
+          <input type="text" name="taskNameInput" id="taskNameInput" required />
+        </div>
+        <div class="mb-3">
+          <label for="categoryInput" class="form-label">Category:</label>
+          <input type="text" name="categoryInput" id="categoryInput" required />
+        </div>
+        <div class="mb-3">
+          <label for="deadlineInput" class="form-label">Deadline:</label>
+          <input type="text" name="deadlineInput" id="deadlineInput" required />
+        </div>
+        <div class="mb-3">
+          <label for="initialStatusInput">Initial Status:</label>
+          <input
+            type="text"
+            name="initialStatusInput"
+            id="initialStatusInput"
+            value="In Progress"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="submitButton"
+        >
+          Submit
+        </button>
+      </form>
+      <div>
+        <table class="table border m-3">
+          <thead>
+            <th scope="col">Task</th>
+            <th scope="col">Category</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Status</th>
+          </thead>
+          <tbody>
+            <th scope="row"></th>
+            <th scope="row"></th>
+            <th scope="row"></th>
+            <th scope="row"></th>
+          </tbody>
+        </table>
+      </div>
+
+      </div>
+    </main>
   </body>
 </html>
