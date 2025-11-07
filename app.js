@@ -42,15 +42,15 @@ function submit(event) {
   newRow.setAttribute("id", `row-${taskObj.id}`);
   newRow.setAttribute("value", `${taskObj.id}`);
 
-  const updatesCellButtons = document.createElement("td");
+  const deleteButtonCell = newRow.insertCell();
   const deleteButton = document.createElement("button");
   deleteButton.setAttribute("class", "btn btn-danger btn-sm");
   deleteButton.setAttribute("value", `${taskObj.id}`);
+  deleteButton.addEventListener("click", deleteRow);
   deleteButton.innerText = "Delete";
-  updatesCellButtons.appendChild(deleteButton);
+  deleteButtonCell.appendChild(deleteButton);
 
   tableBody.appendChild(newRow);
-  console.log("Task Array: " + JSON.stringify(taskArr));
 }
 
 function assignID() {
@@ -67,8 +67,8 @@ function updateStatus(updatedData) {
   console.log("update status dropdown changed");
 }
 
-function deleteRow(deleteID) {
-  //TODO delete row by id
-  // let updatedRow = taskArr.filter((row) => row.id !== deleteID);
-  console.log("delete button clicked");
+function deleteRow(deleteEvent) {
+  let deleteID = Number(deleteEvent.target.value);
+  let filteredRowEl = taskArr.filter((rowObj) => rowObj.id !== deleteID);
+  taskArr = filteredRowEl;
 }

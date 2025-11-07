@@ -32,19 +32,17 @@
         </div>
         <div class="mb-3">
           <label for="initialStatusInput">Initial Status:</label>
-          <input
-            type="text"
+          <select
             name="initialStatusInput"
             id="initialStatusInput"
-            value="In Progress"
-          />
+            class="form-select"
+          >
+            <option value="In Progress" selected>In Progress</option>
+            <option value="Completed" selected>Completed</option>
+          </select>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="submitButton"
-        >
-          Submit
+        <button type="submit" class="btn btn-primary" id="submitButton">
+          Add Task
         </button>
       </form>
       <div>
@@ -57,21 +55,8 @@
             <th scope="col">Status</th>
             <th scope="col">Update</th>
           </thead>
-          <tbody id="taskTableBody">
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <button type="button" class="btn btn-danger btn-sm" value="3">Delete</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="taskTableBody"></tbody>
         </table>
-      </div>
-
       </div>
     </main>
   </body>
