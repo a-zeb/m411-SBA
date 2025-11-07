@@ -48,18 +48,26 @@
         </button>
       </form>
       <div>
-        <table class="table border m-3">
-          <thead>
+        <table class="table table-striped border m-3" id="taskTable">
+          <thead class="table-dark">
+            <th scope="col">ID</th>
             <th scope="col">Task</th>
             <th scope="col">Category</th>
             <th scope="col">Deadline</th>
             <th scope="col">Status</th>
+            <th scope="col">Update</th>
           </thead>
-          <tbody>
-            <th scope="row"></th>
-            <th scope="row"></th>
-            <th scope="row"></th>
-            <th scope="row"></th>
+          <tbody id="taskTableBody">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm" value="3">Delete</button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
