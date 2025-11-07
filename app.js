@@ -1,20 +1,15 @@
 let taskArr = [];
-// let storedTableData = localStorage.getItem("storedTableData");
+let storedTableData = localStorage.getItem("storedTableData");
 const tableBody = document.getElementById("taskTableBody");
 
-// TODO: add data persist
-// $(window).bind("beforeunload", function () {
-//   localStorage.setItem(JSON.stringify(taskArr));
-// });
-// if (storedTableData) {
-//   taskArr = JSON.parse(storedTableData);
-//   populateTable();
-// }
-
-function populateTable() {
-  taskArr.forEach((rowData) => {
-    for (const key in rowData) {
+if (storedTableData) {
+  console.log("storedTableData unparsed: " + storedTableData);
+  taskArr = JSON.parse(storedTableData);
+  console.log("storedTableData parsed: " + JSON.stringify(taskArr));
+  taskArr.forEach((rowElement) => {
+    for (const taskObj in rowElement) {
       //TODO: append the row data and create the table body
+      const newRow = tableBody.insertRow();
     }
   });
 }
@@ -22,7 +17,6 @@ function populateTable() {
 document.getElementById("submitButton").addEventListener("click", submit);
 
 function submit(event) {
-  event.preventDefault();
   const newRow = tableBody.insertRow();
   let taskObj = {};
 
@@ -40,7 +34,7 @@ function submit(event) {
       const updateStatusDropdown = document.createElement("select");
       updateStatusDropdown.setAttribute("id", `status-${taskObj.id}`);
       updateStatusDropdown.setAttribute("class", "form-select");
-      updateStatusDropdown.addEventListener("click", updateStatus);
+      updateStatusDropdown.addEventListener("change", updateStatus);
 
       const inProgressOption = document.createElement("option");
       inProgressOption.value = "In Progress";
@@ -77,6 +71,7 @@ function submit(event) {
   deleteButtonCell.appendChild(deleteButton);
 
   tableBody.appendChild(newRow);
+  localStorage.setItem("storedTableData", JSON.stringify(taskArr));
 }
 
 function assignID() {
@@ -88,11 +83,13 @@ function assignID() {
 }
 
 function updateStatus(updateEvent) {
-  //TODO find row by key, modify row
-  // let updatedTableRowTag = document.getElementById(`status-${rowId}`);
-  // let updatedTableRowId = updatedTableRowTag.slice(7);
-  // let updatedRowObj = taskArr.find((row) => row.id === updatedTableRowId);
-  // console.log("row to update: " + updatedRowObj);
+  let updatedStatusValue = updateEvent.target.value;
+  let updatedRowId = Number(updateEvent.target.id.slice(7));
+  let indexOfTaskArrUpdate = taskArr.findIndex(
+    (row) => row.id === updatedRowId
+  );
+  taskArr[indexOfTaskArrUpdate].status = updatedStatusValue;
+  localStorage.setItem("storedTableData", JSON.stringify(taskArr));
 }
 
 function deleteRow(deleteEvent) {
@@ -101,4 +98,5 @@ function deleteRow(deleteEvent) {
   taskArr = filteredRowEl;
   domRowToDelete = document.getElementById(`row-${deleteEvent.target.value}`);
   domRowToDelete.remove();
+  localStorage.setItem("storedTableData", JSON.stringify(taskArr));
 }
