@@ -6,11 +6,51 @@ if (storedTableData) {
   console.log("storedTableData unparsed: " + storedTableData);
   taskArr = JSON.parse(storedTableData);
   console.log("storedTableData parsed: " + JSON.stringify(taskArr));
-  taskArr.forEach((rowElement) => {
-    for (const taskObj in rowElement) {
-      //TODO: append the row data and create the table body
-      const newRow = tableBody.insertRow();
+  taskArr.forEach((taskObj) => {
+    const newRow = tableBody.insertRow();
+    for (const key in taskObj) {
+      if (key == "status") {
+        const newUpdateStatusCell = newRow.insertCell();
+
+        const updateStatusDropdown = document.createElement("select");
+        updateStatusDropdown.setAttribute("id", `status-${taskObj.id}`);
+        updateStatusDropdown.setAttribute("class", "form-select");
+        updateStatusDropdown.addEventListener("change", updateStatus);
+
+        const inProgressOption = document.createElement("option");
+        inProgressOption.value = "In Progress";
+        inProgressOption.innerText = "In Progress";
+
+        const completedOption = document.createElement("option");
+        completedOption.value = "Completed";
+        completedOption.innerText = "Completed";
+
+        updateStatusDropdown.value = taskObj[key];
+
+        taskObj[key] == "In Progress"
+          ? (inProgressOption.selected = true)
+          : (completedOption.selected = true);
+
+        updateStatusDropdown.appendChild(inProgressOption);
+        updateStatusDropdown.appendChild(completedOption);
+        newUpdateStatusCell.appendChild(updateStatusDropdown);
+      } else {
+        const newCell = newRow.insertCell();
+        newCell.innerText = taskObj[key];
+      }
     }
+    newRow.setAttribute("id", `row-${taskObj.id}`);
+    newRow.setAttribute("value", `${taskObj.id}`);
+
+    const deleteButtonCell = newRow.insertCell();
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("class", "btn btn-danger btn-sm");
+    deleteButton.setAttribute("value", `${taskObj.id}`);
+    deleteButton.addEventListener("click", deleteRow);
+    deleteButton.innerText = "Delete";
+    deleteButtonCell.appendChild(deleteButton);
+
+    tableBody.appendChild(newRow);
   });
 }
 
