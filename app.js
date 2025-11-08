@@ -1,11 +1,12 @@
 let taskArr = [];
 let storedTableData = localStorage.getItem("storedTableData");
 const tableBody = document.getElementById("taskTableBody");
+document
+  .getElementById("resetTaskData")
+  .addEventListener("click", resetTaskData);
 
 if (storedTableData) {
-  console.log("storedTableData unparsed: " + storedTableData);
   taskArr = JSON.parse(storedTableData);
-  console.log("storedTableData parsed: " + JSON.stringify(taskArr));
   taskArr.forEach((taskObj) => {
     const newRow = tableBody.insertRow();
     for (const key in taskObj) {
@@ -139,4 +140,9 @@ function deleteRow(deleteEvent) {
   domRowToDelete = document.getElementById(`row-${deleteEvent.target.value}`);
   domRowToDelete.remove();
   localStorage.setItem("storedTableData", JSON.stringify(taskArr));
+}
+
+function resetTaskData() {
+  localStorage.clear();
+  window.location.reload();
 }

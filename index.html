@@ -20,15 +20,15 @@
       >
         <div class="mb-3">
           <label for="taskNameInput" class="form-label">Task Name:</label>
-          <input type="text" name="taskNameInput" id="taskNameInput" required />
+          <input type="text" name="taskNameInput" id="taskNameInput" />
         </div>
         <div class="mb-3">
           <label for="categoryInput" class="form-label">Category:</label>
-          <input type="text" name="categoryInput" id="categoryInput" required />
+          <input type="text" name="categoryInput" id="categoryInput" />
         </div>
         <div class="mb-3">
           <label for="deadlineInput" class="form-label">Deadline:</label>
-          <input type="text" name="deadlineInput" id="deadlineInput" required />
+          <input type="text" name="deadlineInput" id="deadlineInput" />
         </div>
         <div class="mb-3">
           <label for="initialStatusInput">Initial Status:</label>
@@ -45,8 +45,17 @@
           Add Task
         </button>
       </form>
-      <div class="container card m-3 p-3">
-        <table class="table table-striped border m-3" id="taskTable">
+      <div
+        class="container d-flex flex-column border m-3 p-3 justify-content-center align-items-center"
+      >
+        <button
+          type="button"
+          class="btn btn-danger btn-md m-3 align-self-start"
+          id="resetTaskData"
+        >
+          Reset Task Data
+        </button>
+        <table class="table table-striped border" id="taskTable">
           <thead class="table-dark">
             <th scope="col">ID</th>
             <th scope="col">Task</th>

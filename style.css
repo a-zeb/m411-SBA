@@ -2,10 +2,6 @@ body {
     background-color: rgb(47, 104, 120);
 }
 
-form {
-    background-color: azure;
-}
-
-table {
-    background-color: azure;
+.container {
+    background-color: rgb(163, 202, 202);
 }
